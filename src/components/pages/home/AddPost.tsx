@@ -1,7 +1,13 @@
 import React, {FC} from 'react';
 import {Box, TextField} from "@mui/material";
+import {PostType, TypeSetState} from "../../../types";
 
-const AddPost: FC = () => {
+
+type AddPostType = {
+    setPosts: TypeSetState<PostType[]>
+}
+
+const AddPost: FC<AddPostType> = () => {
     return (
         <Box sx={{
             border: '1px solid #e2e2e2',

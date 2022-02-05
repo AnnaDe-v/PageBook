@@ -2,16 +2,10 @@ import React, {FC} from 'react';
 import {Link, useNavigate,} from 'react-router-dom';
 import {Avatar, Box, Card, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import { v4 as uuidv4 } from 'uuid';
-
-type usersType = {
-    _id: string
-    avatar: string
-    name: string
-    isInNetwork: boolean
-}
+import {UserType} from "../../../types";
 
 
-const users: usersType[] = [
+const users: UserType[] = [
     {
         _id: uuidv4(),
         avatar:
