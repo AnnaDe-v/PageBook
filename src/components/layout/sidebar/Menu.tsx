@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Link, useNavigate,} from "react-router-dom";
 import {Avatar, Box, Card, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import {menu} from "./DataMenu";
+import {menu} from "./dataMenu";
 
 
 const Menu: FC = () => {
