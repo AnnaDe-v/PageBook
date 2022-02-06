@@ -21,9 +21,12 @@ const RoutesC: FC = () => {
 
                 return (
 
-                <Route path="/" key={`route ${route.path}`} element={<Layout>
+                <Route path="/"
+                       key={`route ${route.path}`}
+                       element={<Layout>
                     {route.auth && <route.component />}
-                </Layout>}></Route>
+                </Layout>}>
+                </Route>
 
 
 

@@ -7,15 +7,20 @@ type AddPostType = {
     setPosts: TypeSetState<PostType[]>
 }
 
+
 const AddPost: FC<AddPostType> = ({setPosts}) => {
     const [content, setContent] = useState('')
 
-    const addPostHandler = () => {
-        setPosts(prev => [...prev, {
-            author: users[0],
-            content,
-            createdAt: 'минуту назад'
-        }])
+    const addPostHandler = (e: React.KeyboardEvent<HTMLElement>): void => {
+        if(e.key === 'Enter') {
+            setPosts(prev => [{
+                author: users[1],
+                content,
+                createdAt: 'минуту назад'
+            }, ...prev])
+            setContent('')
+        }
+
     }
 
     return (
@@ -38,7 +43,8 @@ const AddPost: FC<AddPostType> = ({setPosts}) => {
                     width: '100%',
                 }}
                 onKeyPress={addPostHandler}
-                onChange={e => setContent(e.target.value)}
+                onChange={e => setContent(e.currentTarget.value)}
+                value={content}
             />
         </Box>
     );

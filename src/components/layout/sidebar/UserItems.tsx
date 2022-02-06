@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Link, useNavigate,} from 'react-router-dom';
 import {Avatar, Box, Card, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {users} from './dataUsers'
-
+import MessageIcon from '@mui/icons-material/Message';
 
 
 
@@ -43,7 +43,7 @@ const UserItems:FC = () => {
                 <ListItem disablePadding>
                     <ListItemButton onClick={() => navigate('/messages')}>
                         <ListItemIcon sx={{minWidth: 36 }}>
-                            {/*<QuestionAnswer />*/}
+                            <MessageIcon/>
                         </ListItemIcon>
                         <ListItemText primary='Сообщения' />
                     </ListItemButton>

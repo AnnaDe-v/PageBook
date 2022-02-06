@@ -5,28 +5,28 @@ export const users: UserType[] = [
     {
         _id: uuidv4(),
         avatar:
-            'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=1843',
+            'https://cdn.pixabay.com/photo/2014/10/28/22/19/young-507297_960_720.jpg',
         name: 'Петр Лялин',
         isInNetwork: true,
     },
     {
         _id: uuidv4(),
         avatar:
-            'https://img.etimg.com/thumb/width-640,height-480,imgsize-144736,resizemode-1,msid-69037337/small-biz/startups/newsbuzz/fraud-is-only-possible-if-user-grants-access-oldrich-mller-coo-anydesk/oldrich-muller.jpg',
+            'https://мед-дент.рф/images/id/normal/1563694154.jpg',
         name: 'Иван Часов',
         isInNetwork: true,
     },
     {
         _id: uuidv4(),
         avatar:
-            'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png',
+            'https://c4.wallpaperflare.com/wallpaper/918/912/880/johannes-strate-skarf-man-face-wallpaper-preview.jpg',
         name: 'Максим Гудков',
         isInNetwork: false,
     },
     {
         _id: uuidv4(),
         avatar:
-            'https://dwpdigital.blog.gov.uk/wp-content/uploads/sites/197/2016/07/P1090594-1.jpeg',
+            'https://sun9-2.userapi.com/impf/c639524/v639524222/4e35a/R4320_oO-wg.jpg?size=604x403&quality=96&sign=782db985fb0be2e93103eea6741a6875&type=album',
         name: 'Мария Желева',
         isInNetwork: true,
     },
