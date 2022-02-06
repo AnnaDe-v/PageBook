@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-const Messages: FC = () => {
+const Friends: FC = () => {
     return (
         <div>
-            Messages
+            Friends
         </div>
     );
 };
 
-export default Messages;
+export default Friends;

@@ -1,10 +1,8 @@
 import React, {FC} from 'react'
-import {NavLink, Route, BrowserRouter as Router, HashRouter, Routes} from 'react-router-dom'
-import Header from "../layout/header/Header";
+import {Route, Routes} from 'react-router-dom'
 import Layout from "../layout/Layout";
-import Home from "../pages/home/Home";
-import UserItems from "../layout/sidebar/UserItems";
-import { routes } from './list';
+
+import { routes } from './dataRoutes';
 
 
 const RoutesC: FC = () => {
@@ -21,11 +19,11 @@ const RoutesC: FC = () => {
 
                 return (
 
-                <Route path="/"
+                <Route path={route.path}
                        key={`route ${route.path}`}
                        element={<Layout>
-                    {route.auth && <route.component />}
-                </Layout>}>
+                                    {route.auth && <route.component />}
+                                </Layout>}>
                 </Route>
 
 

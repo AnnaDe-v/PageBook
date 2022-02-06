@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Header from "./header/Header";
-// import {Grid} from "@mui/material";
 import Sidebar from "./sidebar/Sidebar";
 import {Grid} from "@mui/material";
 

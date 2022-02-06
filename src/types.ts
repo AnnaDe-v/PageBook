@@ -29,3 +29,10 @@ export type MessageType = {
     user: UserType
     message: string
 }
+
+
+export type UserLoginType = {
+    email: string
+    password: string
+    name: string
+}
