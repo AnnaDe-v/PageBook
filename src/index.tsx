@@ -6,6 +6,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 
 
 import * as firebase from "firebase/app";
+import {AuthProvider} from "./components/providers/AuthProvider";
 
 
 const firebaseConfig = {
@@ -24,10 +25,11 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
     <React.StrictMode>
-
+        <AuthProvider>
         <Router >
             <RoutesC/>
         </Router >
+            </AuthProvider>
     </React.StrictMode>
 ,
 document.getElementById('root')

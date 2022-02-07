@@ -3,6 +3,7 @@ import {TypeSetState, UserType} from '../../types'
 import { onAuthStateChanged, getAuth, Auth } from 'firebase/auth'
 import { getFirestore, Firestore } from 'firebase/firestore'
 import { users } from '../layout/sidebar/dataUsers'
+import {useNavigate} from "react-router-dom";
 
 interface IContext {
     user: UserType | null
@@ -27,7 +28,10 @@ export const AuthProvider: FC = ({ children }) => {
                     avatar: users[1].avatar,
                     name: authUser.displayName || '',
                 })
-            else setUser(null)
+            else {
+                setUser(null)
+
+            }
         })
         return () => {
             unListen()
