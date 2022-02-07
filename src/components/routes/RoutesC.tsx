@@ -1,29 +1,32 @@
 import React, {FC} from 'react'
-import {NavLink, Route, BrowserRouter as Router, HashRouter, Routes} from 'react-router-dom'
-import Header from "../layout/header/Header";
+import {Route, Routes} from 'react-router-dom'
 import Layout from "../layout/Layout";
-import Home from "../pages/home/Home";
-import UserItems from "../layout/sidebar/UserItems";
-import { routes } from './list';
+
+import { routes } from './dataRoutes';
+import {useAuth} from "../providers/useAuth";
+import Auth from "../pages/auth/Auth";
 
 
 const RoutesC: FC = () => {
-    const isAuth = true
+    const {user} = useAuth()
 
     return (
             <Routes>
 
                 {routes.map(route => {
-                    if(route.auth && !isAuth) {
+                    if(route.auth && !user) {
                         return false
                     }
 
 
                 return (
 
-                <Route path="/" key={`route ${route.path}`} element={<Layout>
-                    {route.auth && <route.component />}
-                </Layout>}></Route>
+                <Route path={route.path}
+                       key={`route ${route.path}`}
+                       element={<Layout>
+                                    {route.auth && !user ? <Auth/> : <route.component />}
+                                </Layout>}>
+                </Route>
 
 
 
