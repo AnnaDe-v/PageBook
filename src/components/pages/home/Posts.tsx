@@ -1,19 +1,33 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {PostType} from "../../../types";
 import {Avatar, Box, Card, ImageList, ImageListItem} from "@mui/material";
 import {Link} from "react-router-dom";
+import { useAuth } from '../../providers/useAuth';
+import {collection, onSnapshot} from "firebase/firestore";
+import {initialPosts} from "./initialPosts";
 
-interface IPosts {
-    posts: PostType[]
-}
 
-const Posts: FC<IPosts> = ({posts}) => {
 
+const Posts: FC = () => {
+    const { db } = useAuth()
+    const [posts, setPosts] = useState<PostType[]>(initialPosts)
+
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, 'posts'), doc => {
+            doc.forEach((d: any) => {
+                setPosts(prev => [...prev, d.data()])
+            })
+        })
+
+        return () => {
+            unsub()
+        }
+    }, [])
 
     return (
         <>
-            {posts.map(post => (
-                <Card key={post.author._id}>
+            {posts.map((post, idx) => (
+                <Card key={`Post-${idx}`}>
                     <Link
                         key={post.author._id}
                         to={`/profile/${post.author._id}`}
@@ -61,7 +75,7 @@ const Posts: FC<IPosts> = ({posts}) => {
                 </Card>
             ))}
         </>
-    );
-};
+    )
+}
 
 export default Posts;

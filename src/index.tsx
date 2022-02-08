@@ -26,10 +26,10 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
     <React.StrictMode>
         <AuthProvider>
-        <Router >
-            <RoutesC/>
-        </Router >
-            </AuthProvider>
+            <Router >
+                <RoutesC/>
+            </Router >
+        </AuthProvider>
     </React.StrictMode>
 ,
 document.getElementById('root')
