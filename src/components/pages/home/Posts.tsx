@@ -12,6 +12,7 @@ const Posts: FC = () => {
     const { db } = useAuth()
     const [posts, setPosts] = useState<PostType[]>(initialPosts)
 
+
     useEffect(() => {
         const unsub = onSnapshot(collection(db, 'posts'), doc => {
             doc.forEach((d: any) => {
