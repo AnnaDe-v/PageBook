@@ -3,7 +3,7 @@ import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import {Button, Grid, LinearProgress} from "@mui/material";
 import {useAuth} from "../providers/useAuth";
-import {RequestStatusType, setLayoutStatusAC} from './layout-reducer';
+import {setLoadingStatusAC} from './layout-reducer';
 import {AppRootStateType} from "../../app/store";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -11,17 +11,21 @@ import {useDispatch, useSelector} from "react-redux";
 const Layout:FC = ({children}) => {
     const dispatch = useDispatch()
     const {user} = useAuth()
-    const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.layout.status);
+    const isLoading = useSelector<AppRootStateType, boolean>((state) => state.layout.isLoading);
 
-    const statusHandler = () => {
-        dispatch(setLayoutStatusAC("succeeded"))
+    const isLoadindStart = () => {
+        dispatch(setLoadingStatusAC(true))
+    }
+    const isLoadindStop = () => {
+        dispatch(setLoadingStatusAC(false))
     }
 
     return (
         <>
             <Header/>
-            <Button variant='outlined' onClick={statusHandler}>Stop</Button>
-            {status === "loading" && <LinearProgress/>}
+            <Button variant='outlined' onClick={isLoadindStart}>Loading</Button>
+            <Button variant='outlined' onClick={isLoadindStop}>Stop</Button>
+            {isLoading === true && <LinearProgress/>}
             <Grid container spacing={2} marginX={0} marginTop={2} boxSizing={'border-box'}>
                 {user && (
                     <Grid item md={2}>

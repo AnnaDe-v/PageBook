@@ -18,8 +18,8 @@ const RoutesC: FC = () => {
                                     path={route.path}
                                     key={`route ${route.path}`}
                                     element={
-                                        <Layout>
-                                            {route.auth && !user ? <Auth/> : <route.component/>}
+                                        <Layout key={`route ${route.path}`}>
+                                            {route.auth && !user ? <Auth key={route.path}/> : <route.component key={`route ${route.path}`}/>}
                                         </Layout>
                                     }
                                     />

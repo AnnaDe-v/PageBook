@@ -22,9 +22,11 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
+    "react-redux-firebase-auth": "^2.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "redux": "^4.1.2",
+    "redux-firestore": "^0.15.2",
     "redux-thunk": "^2.4.1",
     "typescript": "^4.4.2",
     "uuid": "^8.3.2",
@@ -53,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-redux-firebase": "^3.11.0"
   }
 }

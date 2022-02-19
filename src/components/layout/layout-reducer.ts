@@ -1,31 +1,24 @@
-import { Dispatch } from "redux";
-
 
 const initialState: InitialStateType = {
-  status: 'loading'
+  isLoading: false
 };
+
+export type InitialStateType = {
+  isLoading: boolean;
+}
+
 
 export const layoutReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
-    case "LAYOUT/SET-STATUS":
-      return { ...state, status: action.status };
+    case "LAYOUT/SET-LOADING_STATUS":
+      return { ...state, isLoading: action.isLoading };
     default:
       return { ...state };
   }
 };
 
-export type InitialStateType = {
-  status: RequestStatusType
-}
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
 
+export const setLoadingStatusAC = (isLoading: boolean) =>
+  ({ type: "LAYOUT/SET-LOADING_STATUS", isLoading } as const);
 
-export const setLayoutStatusAC = (status: RequestStatusType) =>
-  ({ type: "LAYOUT/SET-STATUS", status } as const);
-
-
-
-export type SetLayoutStatusActionType = ReturnType<typeof setLayoutStatusAC>;
-
-
-type ActionsType = SetLayoutStatusActionType;
+type ActionsType = ReturnType<typeof setLoadingStatusAC>;

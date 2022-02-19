@@ -15,4 +15,5 @@ export const initialPosts: PostType[] = [{
         'https://www.cashadvance6online.com/data/archive/img/3912590192.jpeg',
         'https://7themes.su/php/imres/resize.php?width=960&height=640&cropratio=3:2&image=/_ph/55/966413306.jpg'
     ],
-}]
+},
+]
