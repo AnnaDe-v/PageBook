@@ -1,12 +1,25 @@
 import React, { FC } from 'react';
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
-import {Grid} from "@mui/material";
+import {Button, Grid, LinearProgress} from "@mui/material";
 import {useAuth} from "../providers/useAuth";
+import {setLoadingStatusAC} from './layout-reducer';
+import {AppRootStateType} from "../../app/store";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const Layout:FC = ({children}) => {
     const {user} = useAuth()
+    const dispatch = useDispatch()
+
+    const isLoading = useSelector<AppRootStateType, boolean>((state) => state.layout.isLoading);
+
+    const isLoadindStart = () => {
+        dispatch(setLoadingStatusAC(true))
+    }
+    const isLoadindStop = () => {
+        dispatch(setLoadingStatusAC(false))
+    }
 
     return (
         <>

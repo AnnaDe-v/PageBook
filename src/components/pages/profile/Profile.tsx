@@ -7,10 +7,13 @@ const Profile: FC = () => {
     const { user } = useAuth()
 
     return (
-        <Card>
-            <Avatar src={user?.avatar}/>
-            <h1>{user?.name}</h1>
-        </Card>
+        <>
+            <Card>
+                <Avatar src={user?.avatar}/>
+                <h1>{user?.name}</h1>
+            </Card>
+        </>
+
     )
 }
 
