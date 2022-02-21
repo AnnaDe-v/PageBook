@@ -20,4 +20,6 @@ export const layoutReducer = (state: InitialStateType = initialState, action: Ac
 export const setLoadingStatusAC = (isLoading: boolean) =>
     ({ type: "LAYOUT/SET-LOADING_STATUS", isLoading } as const);
 
-type ActionsType = ReturnType<typeof setLoadingStatusAC>;
+export type setLoadingStatus = ReturnType<typeof setLoadingStatusAC>
+
+type ActionsType = setLoadingStatus;

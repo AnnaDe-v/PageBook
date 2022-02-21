@@ -13,6 +13,7 @@ export type UserType = {
 }
 
 export type PostType = {
+    postId: string
     author: UserType
     createdAt: string
     content: string

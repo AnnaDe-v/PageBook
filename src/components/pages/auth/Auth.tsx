@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import {useNavigate} from "react-router-dom";
 import { useAuth } from '../../providers/useAuth';
+import {setLoadingStatusAC} from "../../layout/layout-reducer";
 
 const Auth = () => {
     const { ga, user } = useAuth()
@@ -25,6 +26,7 @@ const Auth = () => {
         e.preventDefault()
 
         if (isRegForm) {
+            setLoadingStatusAC(true)
             try {
                 const res = await createUserWithEmailAndPassword(
                     ga,
@@ -37,6 +39,7 @@ const Auth = () => {
                 })
             } catch (error: any) {
                 error.message && setError(error.message)
+                setLoadingStatusAC(false)
             }
         } else {
             try {

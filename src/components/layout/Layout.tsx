@@ -24,6 +24,9 @@ const Layout:FC = ({children}) => {
     return (
         <>
             <Header/>
+            {isLoading && <LinearProgress/>}
+            <Button onClick={isLoadindStart}>S</Button>
+            <Button onClick={isLoadindStop}>-</Button>
             <Grid container spacing={2} marginX={0} marginTop={2} boxSizing={'border-box'}>
                 {user && (
                     <Grid item md={2}>

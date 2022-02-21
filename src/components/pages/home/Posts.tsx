@@ -1,18 +1,38 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, KeyboardEvent, MouseEventHandler, useEffect, useState} from 'react';
 import {PostType} from "../../../types";
-import {Avatar, Box, Card, ImageList, ImageListItem} from "@mui/material";
+import {Avatar, Box, Card, IconButton, ImageList, ImageListItem} from "@mui/material";
 import {Link} from "react-router-dom";
 import { useAuth } from '../../providers/useAuth';
-import {collection, onSnapshot} from "firebase/firestore";
+import {addDoc, collection, deleteDoc, doc, onSnapshot} from "firebase/firestore";
 import {initialPosts} from "./initialPosts";
+import {setLoadingStatusAC} from "../../layout/layout-reducer";
+import DeleteIcon from '@mui/icons-material/Delete';
+import user from "../../layout/sidebar/User";
+import {useSelector, useDispatch} from "react-redux";
+import {AppRootStateType} from "../../../app/store";
 
 
 
 const Posts: FC = () => {
     const { db } = useAuth()
     const [posts, setPosts] = useState<PostType[]>(initialPosts)
+    const [error, setError] = useState('')
+    const [idid, setIdid] = useState('')
+    // const posts = useSelector<AppRootStateType, PostType[]>((state) => state.posts);
+    const dispatch = useDispatch()
+
+
+    // useEffect(() => {
+    //     dispatch(setLoadingStatusAC(true))
+    //     dispatch(fetchPostsTC())
+    // }, [])
+    //
+    //
+
+
 
     useEffect(() => {
+        setLoadingStatusAC(true)
         const unsub = onSnapshot(collection(db, 'posts'), doc => {
             doc.forEach((d: any) => {
                 setPosts(prev => [...prev, d.data()])
@@ -22,7 +42,17 @@ const Posts: FC = () => {
         return () => {
             unsub()
         }
-    }, [])
+    }, [db])
+
+    const removePostHandler = async (postId: string) => {
+        setLoadingStatusAC(true)
+            try {
+                await deleteDoc(doc(db, `posts/`, postId));
+            } catch (e: any) {
+                setError('kek')
+            }
+    }
+
 
     return (
         <>
@@ -59,9 +89,13 @@ const Posts: FC = () => {
                                 {post.createdAt}
                             </div>
                         </div>
+
                     </Link>
 
                     <p>{post.content}</p>
+                    <IconButton aria-label="delete" onClick={() => removePostHandler(post.postId)}>
+                        <DeleteIcon/>
+                    </IconButton>
 
                     {post?.images?.length && (
                         <ImageList variant='masonry' cols={3} gap={8}>
