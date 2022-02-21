@@ -32,24 +32,24 @@ const Posts: FC = () => {
 
 
     useEffect(() => {
-        setLoadingStatusAC(true)
+        dispatch(setLoadingStatusAC(true))
         const unsub = onSnapshot(collection(db, 'posts'), doc => {
             doc.forEach((d: any) => {
                 setPosts(prev => [...prev, d.data()])
             })
         })
-
+        dispatch(setLoadingStatusAC(false))
         return () => {
             unsub()
         }
     }, [db])
 
     const removePostHandler = async (postId: string) => {
-        setLoadingStatusAC(true)
+        dispatch(setLoadingStatusAC(true))
             try {
                 await deleteDoc(doc(db, `posts/`, postId));
             } catch (e: any) {
-                setError('kek')
+                setError(error)
             }
     }
 
