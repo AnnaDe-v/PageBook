@@ -30,22 +30,36 @@ const Posts = () => {
     //
 
     useEffect(() => {
-        debugger
 
         const unsub = onSnapshot(collection(db, 'posts'), doc => {
+            const importedPosts: PostType[] = []
             doc.forEach((d: any) => {
-                setPosts(prev => [d.data(), ...prev])
+                importedPosts.unshift(d.data())
             })
+            setPosts(importedPosts)
         })
-
         return () => {
             unsub()
-            
         }
-        debugger
     }, [])
 
 
+    // useEffect(() => {
+    //     debugger
+    //     const unsub = onSnapshot(collection(db, 'posts'), doc => {
+    //         dispatch(setLoadingStatusAC(true))
+    //         doc.forEach((d: any) => {
+    //             setPosts(prev => [d.data(), ...prev])
+    //             dispatch(setLoadingStatusAC(false))
+    //             debugger
+    //         })
+    //     })
+    //
+    //     return () => {
+    //         unsub()
+    //         debugger
+    //     }
+    // }, [])
 
 
 
@@ -56,9 +70,13 @@ const Posts = () => {
             await deleteDoc(doc(db, `posts/`, postId));
             let filteredPosts = posts.filter(p => p.postId !== postId)
             setPosts(filteredPosts)
+            debugger
             dispatch(setLoadingStatusAC(false))
         } catch (e: any) {
             setError(error)
+        } finally {
+        setLoadingStatusAC(false)
+            debugger
         }
     }
 

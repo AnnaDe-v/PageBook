@@ -37,7 +37,6 @@ const AddPost: FC = () => {
                     setLoadingStatusAC(false)
                 }
                 setContent('')
-                console.log(e.currentTarget.value)
 
             }
 
