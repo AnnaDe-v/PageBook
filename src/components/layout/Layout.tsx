@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC, useEffect} from 'react';
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import {Button, Grid, LinearProgress} from "@mui/material";
@@ -14,19 +14,12 @@ const Layout:FC = ({children}) => {
 
     const isLoading = useSelector<AppRootStateType, boolean>((state) => state.layout.isLoading);
 
-    const isLoadindStart = () => {
-        dispatch(setLoadingStatusAC(true))
-    }
-    const isLoadindStop = () => {
-        dispatch(setLoadingStatusAC(false))
-    }
+
 
     return (
         <>
             <Header/>
             {isLoading && <LinearProgress/>}
-            <Button onClick={isLoadindStart}>S</Button>
-            <Button onClick={isLoadindStop}>-</Button>
             <Grid container spacing={2} marginX={0} marginTop={2} boxSizing={'border-box'}>
                 {user && (
                     <Grid item md={2}>

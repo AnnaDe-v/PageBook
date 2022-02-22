@@ -1,4 +1,4 @@
-import React, {FC, KeyboardEvent, MouseEventHandler, useEffect, useState} from 'react';
+import React, {FC, KeyboardEvent, MouseEventHandler, useCallback, useEffect, useState} from 'react';
 import {PostType} from "../../../types";
 import {Avatar, Box, Card, IconButton, ImageList, ImageListItem} from "@mui/material";
 import {Link} from "react-router-dom";
@@ -13,11 +13,11 @@ import {AppRootStateType} from "../../../app/store";
 
 
 
-const Posts: FC = () => {
+const Posts = () => {
     const { db } = useAuth()
     const [posts, setPosts] = useState<PostType[]>(initialPosts)
     const [error, setError] = useState('')
-    const [idid, setIdid] = useState('')
+    const [count, setCount] = useState(1)
     // const posts = useSelector<AppRootStateType, PostType[]>((state) => state.posts);
     const dispatch = useDispatch()
 
@@ -29,30 +29,38 @@ const Posts: FC = () => {
     //
     //
 
-
-
     useEffect(() => {
-        dispatch(setLoadingStatusAC(true))
+        debugger
+
         const unsub = onSnapshot(collection(db, 'posts'), doc => {
             doc.forEach((d: any) => {
-                setPosts(prev => [...prev, d.data()])
+                setPosts(prev => [d.data(), ...prev])
             })
         })
-        dispatch(setLoadingStatusAC(false))
+
         return () => {
             unsub()
+            
         }
-    }, [db])
+        debugger
+    }, [])
+
+
+
+
 
     const removePostHandler = async (postId: string) => {
+        debugger
         dispatch(setLoadingStatusAC(true))
-            try {
-                await deleteDoc(doc(db, `posts/`, postId));
-            } catch (e: any) {
-                setError(error)
-            }
+        try {
+            await deleteDoc(doc(db, `posts/`, postId));
+            let filteredPosts = posts.filter(p => p.postId !== postId)
+            setPosts(filteredPosts)
+            dispatch(setLoadingStatusAC(false))
+        } catch (e: any) {
+            setError(error)
+        }
     }
-
 
     return (
         <>

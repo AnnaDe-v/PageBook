@@ -15,28 +15,33 @@ const AddPost: FC = () => {
     const dispatch = useDispatch()
 
 
-    const addPostHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    const addPostHandler = async (e: KeyboardEvent<HTMLInputElement>) => {
+                const current = new Date();
+        const date = `${current.toLocaleString()}`;
 
             setLoadingStatusAC(true)
             if (e.key === 'Enter' && user) {
                 try {
+                    debugger
                     const newPost = doc(collection(db, 'posts'))
-                     setDoc(newPost, {
+                     await setDoc(newPost, {
                         postId: newPost.id,
                         author: user,
                         content,
-                        createdAt: '10 минут назад',
+                        createdAt: date,
                     });
-                    dispatch(setLoadingStatusAC(false))
                 }
                 catch (e: any) {
                     setError(e)
+                } finally {
+                    setLoadingStatusAC(false)
                 }
                 setContent('')
                 console.log(e.currentTarget.value)
+
             }
 
-    }, [content, db]);
+    }
 
 
 
