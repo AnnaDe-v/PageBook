@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react';
 import style from './Header.module.css'
 import ImgLogo from './PB_logo.jpg'
 import {Search} from '@mui/icons-material'
+import {Link} from "react-router-dom";
 
 const Header:FC = () => {
     const [isSearchActive, setIsSearchActive] = useState(false)
@@ -9,7 +10,13 @@ const Header:FC = () => {
     return (
         <header className={style.header}>
             <div className={style.img_wrapper}>
-                <img src={ImgLogo} alt='PB_logo'/>
+                <Link
+                    className={style.link}
+                    key={'headerkey'}
+                    to={`/`}
+                >
+                    <img src={ImgLogo} alt='PB_logo'/>
+                </Link>
             </div>
 
             <div className={style.wrapper}>
