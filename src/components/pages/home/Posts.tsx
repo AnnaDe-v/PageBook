@@ -8,7 +8,8 @@ import {initialPosts} from "./initialPosts";
 import {setLoadingStatusAC} from "../../layout/layout-reducer";
 import DeleteIcon from '@mui/icons-material/Delete';
 import user from "../../layout/sidebar/User";
-import {useSelector, useDispatch} from "react-redux";
+// @ts-ignore
+import {useDispatch} from "react-redux";
 import {AppRootStateType} from "../../../app/store";
 
 
@@ -32,12 +33,19 @@ const Posts = () => {
     useEffect(() => {
 
         const unsub = onSnapshot(collection(db, 'posts'), doc => {
-            const importedPosts: PostType[] = []
+            const arrayForNewPosts: PostType[] = []
             doc.forEach((d: any) => {
-                importedPosts.unshift(d.data())
+                arrayForNewPosts.unshift(d.data())
             })
-            setPosts(importedPosts)
+
+            arrayForNewPosts.sort ( (a, b) => {
+                return Date.parse(a.createdAt) - Date.parse(b.createdAt);
+            });
+
+            setPosts(arrayForNewPosts)
         })
+
+
         return () => {
             unsub()
         }

@@ -38,10 +38,13 @@ const Messages: FC = () => {
 	}, [])
 
 	const addMessageHandler = async (e: MouseEvent<HTMLButtonElement>) => {
+		const current = new Date();
+		const date = `${current.toLocaleString()}`;
 		try {
 			await addDoc(collection(db, 'messages'), {
 				user,
 				message,
+				createdAt: date,
 			})
 		} catch (e: any) {
 			setError(e)
@@ -74,12 +77,17 @@ const Messages: FC = () => {
 								>
 									<Avatar src={msg.user.avatar} />
 								</Grid>
+
 								<Grid item xs={12}>
 									<ListItemText
 										style={
 											msg.user._id === user?._id ? { color: '#1976d2' } : {}
 										}
 										primary={msg.message}
+									/>
+									<ListItemText
+										secondary={msg.createdAt}
+										style = {{marginRight: 50}}
 									/>
 								</Grid>
 								<Grid item xs={12}>

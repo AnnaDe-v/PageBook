@@ -29,6 +29,7 @@ export type MenuItemType = {
 export type MessageType = {
     user: UserType
     message: string
+    createdAt: string
 }
 
 
