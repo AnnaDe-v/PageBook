@@ -29,6 +29,9 @@ const Messages: FC = () => {
 			doc.forEach((d: any) => {
 				array.push(d.data())
 			})
+			array.sort ( (a, b) => {
+				return Date.parse(a.createdAt) - Date.parse(b.createdAt);
+			});
 			setMessages(array)
 		})
 
