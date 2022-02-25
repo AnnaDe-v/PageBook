@@ -1,92 +1,33 @@
-import React, {FC, KeyboardEvent, MouseEventHandler, useCallback, useEffect, useState} from 'react';
-import {PostType} from "../../../types";
+import React, { useEffect, useState } from 'react';
+import {PostType} from "../../../../../fk/src/types";
 import {Avatar, Box, Card, IconButton, ImageList, ImageListItem} from "@mui/material";
 import {Link} from "react-router-dom";
-import { useAuth } from '../../providers/useAuth';
-import {addDoc, collection, deleteDoc, doc, onSnapshot} from "firebase/firestore";
-import {initialPosts} from "./initialPosts";
-import {setLoadingStatusAC} from "../../layout/layout-reducer";
+import { useAuth } from '../../../../../fk/src/components/providers/useAuth';
+import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import {setLoadingStatusAC} from "../../../../../fk/src/components/layout/layout-reducer";
 import DeleteIcon from '@mui/icons-material/Delete';
-import user from "../../layout/sidebar/User";
-// @ts-ignore
-import {useDispatch} from "react-redux";
-import {AppRootStateType} from "../../../app/store";
-
+import {useDispatch, useSelector} from "react-redux";
+import { fetchPostsTC } from './posts-reducer';
+import { AppRootStateType } from '../../../app/store';
 
 
 const Posts = () => {
     const { db } = useAuth()
-    const [posts, setPosts] = useState<PostType[]>(initialPosts)
+    // const [posts, setPosts] = useState<PostType[]>(initialPosts)
     const [error, setError] = useState('')
-    const [count, setCount] = useState(1)
-    // const posts = useSelector<AppRootStateType, PostType[]>((state) => state.posts);
+    const posts = useSelector<AppRootStateType, PostType[]>(state => state.posts);
     const dispatch = useDispatch()
 
-
-    // useEffect(() => {
-    //     dispatch(setLoadingStatusAC(true))
-    //     dispatch(fetchPostsTC())
-    // }, [])
-    //
-    //
-
-    useEffect(() => {
-
-        const unsub = onSnapshot(collection(db, 'posts'), doc => {
-            const arrayForNewPosts: PostType[] = []
-            doc.forEach((d: any) => {
-                arrayForNewPosts.unshift(d.data())
-            })
-
-            arrayForNewPosts.sort ( (a, b) => {
-                return Date.parse(a.createdAt) - Date.parse(b.createdAt);
-            });
-
-            setPosts(arrayForNewPosts)
-        })
-
-
-        return () => {
-            unsub()
-        }
-    }, [])
 
 
     // useEffect(() => {
     //     debugger
-    //     const unsub = onSnapshot(collection(db, 'posts'), doc => {
-    //         dispatch(setLoadingStatusAC(true))
-    //         doc.forEach((d: any) => {
-    //             setPosts(prev => [d.data(), ...prev])
-    //             dispatch(setLoadingStatusAC(false))
-    //             debugger
-    //         })
-    //     })
+    //      dispatch(fetchPostsTC(db))
     //
-    //     return () => {
-    //         unsub()
-    //         debugger
-    //     }
     // }, [])
 
+    dispatch(fetchPostsTC(db))
 
-
-    const removePostHandler = async (postId: string) => {
-        debugger
-        dispatch(setLoadingStatusAC(true))
-        try {
-            await deleteDoc(doc(db, `posts/`, postId));
-            let filteredPosts = posts.filter(p => p.postId !== postId)
-            setPosts(filteredPosts)
-            debugger
-            dispatch(setLoadingStatusAC(false))
-        } catch (e: any) {
-            setError(error)
-        } finally {
-        setLoadingStatusAC(false)
-            debugger
-        }
-    }
 
     return (
         <>
@@ -127,7 +68,7 @@ const Posts = () => {
                     </Link>
 
                     <p>{post.content}</p>
-                    <IconButton aria-label="delete" onClick={() => removePostHandler(post.postId)}>
+                    <IconButton aria-label="delete" >
                         <DeleteIcon/>
                     </IconButton>
 

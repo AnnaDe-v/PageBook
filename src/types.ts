@@ -6,8 +6,8 @@ export type TypeSetState<T> = Dispatch<SetStateAction<T>>
 
 
 export type UserType = {
-    _id: string
-    avatar: string
+    _id?: string
+    avatar?: string
     name: string
     isInNetwork?: boolean
 }

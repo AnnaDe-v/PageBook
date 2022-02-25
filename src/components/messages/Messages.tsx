@@ -90,7 +90,6 @@ const Messages: FC = () => {
 									/>
 									<ListItemText
 										secondary={msg.createdAt}
-										style = {{marginRight: 50}}
 									/>
 								</Grid>
 								<Grid item xs={12}>
@@ -111,8 +110,8 @@ const Messages: FC = () => {
 							value={message}
 						/>
 					</Grid>
-					<Grid item xs={1} alignItems='right'>
-						<Fab color='primary' onClick={addMessageHandler}>
+					<Grid item xs={1} alignItems='right' >
+						<Fab color='primary' onClick={addMessageHandler} style={{ backgroundColor: '#9c84d3' }}>
 							<SendIcon />
 						</Fab>
 					</Grid>

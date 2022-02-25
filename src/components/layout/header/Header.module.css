@@ -35,11 +35,11 @@
 }
 
 .header .wrapper > input::placeholder {
-    color: #245ba8;
+    color: #b499e7;
 }
 
 .header .wrapper > svg {
-    fill: #245ba8 !important;
+    fill: #b499e7 !important;
     position: absolute;
     top: 7px;
     left: 10%;
