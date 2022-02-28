@@ -6,6 +6,7 @@ import {v4 as uuidv4} from "uuid";
 import {setDoc, collection, doc, onSnapshot} from 'firebase/firestore'
 import {setLoadingStatusAC} from '../../layout/layout-reducer';
 import {useDispatch} from 'react-redux';
+import {addPostTC} from "./posts-reducer";
 
 const AddPost: FC = () => {
     const [content, setContent] = useState<string>('')
@@ -21,14 +22,7 @@ const AddPost: FC = () => {
         setLoadingStatusAC(true)
         if (e.key === 'Enter' && user) {
             try {
-                debugger
-                const newPost = doc(collection(db, 'posts'))
-                await setDoc(newPost, {
-                    postId: newPost.id,
-                    author: user,
-                    content,
-                    createdAt: date,
-                });
+               dispatch(addPostTC(db, user, content))
             } catch (e: any) {
                 setError(e)
             } finally {
@@ -39,6 +33,33 @@ const AddPost: FC = () => {
         }
 
     }
+
+
+    // const addPostHandler = async (e: KeyboardEvent<HTMLInputElement>) => {
+    //     const current = new Date();
+    //     const date = `${current.toLocaleString()}`;
+    //
+    //     setLoadingStatusAC(true)
+    //     if (e.key === 'Enter' && user) {
+    //         try {
+    //             debugger
+    //             const newPost = doc(collection(db, 'posts'))
+    //             await setDoc(newPost, {
+    //                 postId: newPost.id,
+    //                 author: user,
+    //                 content,
+    //                 createdAt: date,
+    //             });
+    //         } catch (e: any) {
+    //             setError(e)
+    //         } finally {
+    //             setLoadingStatusAC(false)
+    //         }
+    //         setContent('')
+    //
+    //     }
+    //
+    // }
 
 
     // const addPostHandler = async (e: KeyboardEvent<HTMLInputElement>) => {
