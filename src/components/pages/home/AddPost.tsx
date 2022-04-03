@@ -6,7 +6,7 @@ import {v4 as uuidv4} from "uuid";
 import {setDoc, collection, doc, onSnapshot} from 'firebase/firestore'
 import {setLoadingStatusAC} from '../../layout/layout-reducer';
 import {useDispatch} from 'react-redux';
-import {addPostTC} from "./posts-reducer";
+import { addPostsTC } from './posts-reducer';
 
 const AddPost: FC = () => {
     const [content, setContent] = useState<string>('')
@@ -15,72 +15,44 @@ const AddPost: FC = () => {
     const dispatch = useDispatch()
 
 
-    const addPostHandler = async (e: KeyboardEvent<HTMLInputElement>) => {
-        const current = new Date();
-        const date = `${current.toLocaleString()}`;
 
-        setLoadingStatusAC(true)
-        if (e.key === 'Enter' && user) {
-            try {
-               dispatch(addPostTC(db, user, content))
-            } catch (e: any) {
-                setError(e)
-            } finally {
-                setLoadingStatusAC(false)
-            }
-            setContent('')
-
-        }
-
-    }
-
-
-    // const addPostHandler = async (e: KeyboardEvent<HTMLInputElement>) => {
-    //     const current = new Date();
-    //     const date = `${current.toLocaleString()}`;
-    //
-    //     setLoadingStatusAC(true)
+    // const addPostHandler =  (e: KeyboardEvent<HTMLInputElement>) => {
+    //     setLoadingStatusAC('loading')
     //     if (e.key === 'Enter' && user) {
     //         try {
     //             debugger
-    //             const newPost = doc(collection(db, 'posts'))
-    //             await setDoc(newPost, {
-    //                 postId: newPost.id,
-    //                 author: user,
-    //                 content,
-    //                 createdAt: date,
-    //             });
+    //              dispatch(addPostsTC(content, user, db))
     //         } catch (e: any) {
     //             setError(e)
     //         } finally {
-    //             setLoadingStatusAC(false)
-    //         }
-    //         setContent('')
-    //
-    //     }
-    //
-    // }
-
-
-    // const addPostHandler = async (e: KeyboardEvent<HTMLInputElement>) => {
-    //     setLoadingStatusAC(true)
-    //     if (e.key === 'Enter' && user) {
-    //         try {
-    //             const newPost = doc(collection(db, 'posts'))
-    //             await setDoc(newPost, {
-    //                 postId: newPost.id,
-    //                 author: user,
-    //                 content,
-    //                 createdAt: '10 минут назад',
-    //             });
-    //             await dispatch(setLoadingStatusAC(false))
-    //         }
-    //         catch (e: any) {
-    //             setError(e)
+    //             setLoadingStatusAC('succeeded')
     //         }
     //         setContent('')
     //     }
     // }
+
+
+    const addPostHandler = async (e: KeyboardEvent<HTMLInputElement>) => {
+        setLoadingStatusAC('loading')
+        if (e.key === 'Enter' && user) {
+            try {
+                const current = new Date();
+                const date = `${current.toLocaleString()}`;
+                const newPost = doc(collection(db, 'posts'))
+                await setDoc(newPost, {
+                    postId: newPost.id,
+                    author: user,
+                    content,
+                    createdAt: date,
+                });
+                await dispatch(setLoadingStatusAC('succeeded'))
+            }
+            catch (e: any) {
+                setError(e)
+            }
+            setContent('')
+        }
+    }
 
 
     return (

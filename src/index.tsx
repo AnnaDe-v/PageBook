@@ -4,10 +4,16 @@ import './index.css';
 import RoutesC from "./components/routes/RoutesC";
 import {BrowserRouter as Router} from 'react-router-dom'
 import {Provider} from "react-redux";
-
 import * as firebase from "firebase/app";
 import {AuthProvider} from "./components/providers/AuthProvider";
 import {store} from "./app/store";
+
+const { initializeAppCheck, ReCaptchaV3Provider } = require("firebase/app-check");
+
+
+
+
+
 
 
 const firebaseConfig = {
@@ -20,7 +26,16 @@ const firebaseConfig = {
 };
 
 
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
+
+const appCheck = initializeAppCheck(app, {
+    provider: new ReCaptchaV3Provider('93F50783-B5F5-4270-9A8B-37DC54E97313'),
+
+    // Optional argument. If true, the SDK automatically refreshes App Check
+    // tokens as needed.
+    isTokenAutoRefreshEnabled: true
+});
+
 
 
 

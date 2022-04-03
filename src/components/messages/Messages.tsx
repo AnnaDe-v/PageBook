@@ -33,6 +33,7 @@ const Messages: FC = () => {
 				return Date.parse(a.createdAt) - Date.parse(b.createdAt);
 			});
 			setMessages(array)
+
 		})
 
 		return () => {

@@ -2,40 +2,40 @@ import React, {useEffect, useState} from 'react';
 import {PostType} from "../../../../../fk/src/types";
 import {Avatar, Box, Card, IconButton, ImageList, ImageListItem} from "@mui/material";
 import {Link} from "react-router-dom";
-import {useAuth} from '../../../../../fk/src/components/providers/useAuth';
+import {useAuth} from '../../../components/providers/useAuth';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useDispatch, useSelector} from "react-redux";
-import {ActionsType, fetchPostsTC, removePostTC} from './posts-reducer';
+import {fetchPostsTC,  setPostsAC} from './posts-reducer';
 import {AppRootStateType} from '../../../app/store';
-import {Firestore} from "firebase/firestore";
-import {Dispatch} from "redux";
-import {initialPosts} from "./initialPosts";
+import {RequestStatusType} from "../../layout/layout-reducer";
+import {deleteDoc, doc} from "firebase/firestore";
 
 
 const Posts = () => {
-    const {db} = useAuth()
+
     // const [posts, setPosts] = useState<PostType[]>(initialPosts)
     const [error, setError] = useState('')
     debugger
     const posts = useSelector<AppRootStateType, PostType[]>(state => state.posts);
+    const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.layout.status);
     const dispatch = useDispatch()
+    const {db} = useAuth()
 
 
-    // useEffect(() => {
-    //     dispatch(fetchPostsTC())
-    // }, [])
-
-    useEffect(() => { if (db) { dispatch(fetchPostsTC(db)) } },[db])
-
-    //
-    //
-    // dispatch(fetchPostsTC())
-
-    console.log(posts)
+    useEffect(() => {  dispatch(fetchPostsTC(db))  },[])
 
 
-    const removePost = (postIDID: string) => {
-        dispatch(removePostTC(db, postIDID))
+
+    const removePostHandler = async (postId: string) => {
+        try {
+            await deleteDoc(doc(db, `posts/`, postId));
+            let filteredPosts = posts.filter(p => p.postId !== postId)
+            dispatch(setPostsAC(filteredPosts))
+        } catch (e: any) {
+            setError(error)
+        } finally {
+
+        }
     }
 
 
@@ -76,7 +76,7 @@ const Posts = () => {
             </Link>
 
             <p>{post.content}</p>
-            <IconButton aria-label="delete" onClick={() => removePost(post.postId)}>
+            <IconButton aria-label="delete" onClick={() => removePostHandler(post.postId)}>
                 <DeleteIcon/>
             </IconButton>
 
@@ -103,8 +103,3 @@ const Posts = () => {
 }
 
 export default Posts;
-
-
-
-
-

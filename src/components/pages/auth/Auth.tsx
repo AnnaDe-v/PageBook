@@ -26,7 +26,7 @@ const Auth = () => {
         e.preventDefault()
 
         if (isRegForm) {
-            setLoadingStatusAC(true)
+            setLoadingStatusAC('loading')
             try {
                 const res = await createUserWithEmailAndPassword(
                     ga,
@@ -39,7 +39,7 @@ const Auth = () => {
                 })
             } catch (error: any) {
                 error.message && setError(error.message)
-                setLoadingStatusAC(false)
+                setLoadingStatusAC('succeeded')
             }
         } else {
             try {
