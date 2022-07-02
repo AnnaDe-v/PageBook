@@ -8,21 +8,17 @@ import * as firebase from "firebase/app";
 import {AuthProvider} from "./components/providers/AuthProvider";
 import {store} from "./app/store";
 
+
 const { initializeAppCheck, ReCaptchaV3Provider } = require("firebase/app-check");
 
-
-
-
-
-
-
 const firebaseConfig = {
-    apiKey: "AIzaSyDW_iKaFTWCELa2OHoyGe_J1E-wQ_KUdww",
-    authDomain: "page-book-8b450.firebaseapp.com",
-    projectId: "page-book-8b450",
-    storageBucket: "page-book-8b450.appspot.com",
-    messagingSenderId: "860092718777",
-    appId: "1:860092718777:web:4dbaf2c9be6aef7c7b0568"
+    apiKey: "AIzaSyD-n8PkCeAqyT19faoKDc_gMOPyEJ5y7d8",
+    authDomain: "pagebook2-97bf0.firebaseapp.com",
+    projectId: "pagebook2-97bf0",
+    storageBucket: "pagebook2-97bf0.appspot.com",
+    messagingSenderId: "72999738",
+    appId: "1:72999738:web:80bd24e85f8579c7312603",
+    measurementId: "G-B6859SNMJY"
 };
 
 
@@ -30,13 +26,8 @@ const app = firebase.initializeApp(firebaseConfig);
 
 const appCheck = initializeAppCheck(app, {
     provider: new ReCaptchaV3Provider('93F50783-B5F5-4270-9A8B-37DC54E97313'),
-
-    // Optional argument. If true, the SDK automatically refreshes App Check
-    // tokens as needed.
     isTokenAutoRefreshEnabled: true
 });
-
-
 
 
 ReactDOM.render(

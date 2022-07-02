@@ -15,6 +15,8 @@ import {
 } from '@mui/material'
 import { Send as SendIcon } from '@mui/icons-material'
 import Card from '../../components/ui/Card'
+import {setLoadingStatusAC} from "../layout/layout-reducer";
+import {useDispatch} from "react-redux";
 
 const Messages: FC = () => {
 	const { user, db } = useAuth()
@@ -22,8 +24,11 @@ const Messages: FC = () => {
 	const [error, setError] = useState('')
 	const [message, setMessage] = useState('')
 	const [messages, setMessages] = useState<MessageType[]>([])
+	const dispatch = useDispatch()
 
 	useEffect(() => {
+		debugger
+
 		const unsub = onSnapshot(collection(db, 'messages'), doc => {
 			const array: MessageType[] = []
 			doc.forEach((d: any) => {
@@ -32,12 +37,14 @@ const Messages: FC = () => {
 			array.sort ( (a, b) => {
 				return Date.parse(a.createdAt) - Date.parse(b.createdAt);
 			});
+			debugger
 			setMessages(array)
 
 		})
 
 		return () => {
 			unsub()
+			dispatch(setLoadingStatusAC('succeeded'))
 		}
 	}, [])
 
@@ -54,6 +61,7 @@ const Messages: FC = () => {
 			setError(e)
 		}
 		setMessage('')
+		console.log('click')
 	}
 
 	return (

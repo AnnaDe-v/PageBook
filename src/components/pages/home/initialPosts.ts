@@ -5,7 +5,7 @@ import {PostType} from "../../../types";
 
 
 export const initialPosts: PostType[] = [{
-    postId: "123456",
+    postId: uuidv4(),
     author: {
         _id: uuidv4(),
         avatar: 'https://image.isu.pub/190610194240-bf6690bf4df411a94fd5d160e20fb989/jpg/page_1_thumb_large.jpg',

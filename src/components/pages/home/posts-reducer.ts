@@ -14,8 +14,6 @@ export const postsReducer = (state = defaultState, action: ActionsType): PostTyp
             debugger
             console.log(action.arrNew)
             return action.arrNew
-
-
         case "POSTS/REMOVE-POST":
             debugger
             return state.filter(p => p.postId !== action.postId)

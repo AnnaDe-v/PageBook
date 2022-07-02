@@ -12,8 +12,6 @@ import {deleteDoc, doc} from "firebase/firestore";
 
 
 const Posts = () => {
-
-    // const [posts, setPosts] = useState<PostType[]>(initialPosts)
     const [error, setError] = useState('')
     debugger
     const posts = useSelector<AppRootStateType, PostType[]>(state => state.posts);
@@ -22,13 +20,15 @@ const Posts = () => {
     const {db} = useAuth()
 
 
-    useEffect(() => {  dispatch(fetchPostsTC(db))  },[])
+    useEffect(() => {  dispatch(fetchPostsTC(db)
+    )
+    },[])
 
 
 
     const removePostHandler = async (postId: string) => {
         try {
-            await deleteDoc(doc(db, `posts/`, postId));
+            await deleteDoc(doc(db, `posts`, postId));
             let filteredPosts = posts.filter(p => p.postId !== postId)
             dispatch(setPostsAC(filteredPosts))
         } catch (e: any) {
