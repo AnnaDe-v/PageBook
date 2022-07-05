@@ -1,7 +1,7 @@
 {
   "name": "fk",
   "version": "0.1.0",
-  "homepage": "https://AnnaDe-v.github.io/PageBook",
+  "homepage": "https://annade-v.github.io/PageBook/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
