@@ -9,7 +9,7 @@ import {AuthProvider} from "./components/providers/AuthProvider";
 import {store} from "./app/store";
 
 
-const { initializeAppCheck, ReCaptchaV3Provider } = require("firebase/app-check");
+const { initializeAppCheck, ReCaptchaV3Provider, getToken } = require("firebase/app-check");
 
 const firebaseConfig = {
     apiKey: "AIzaSyD-n8PkCeAqyT19faoKDc_gMOPyEJ5y7d8",
@@ -28,6 +28,15 @@ const appCheck = initializeAppCheck(app, {
     provider: new ReCaptchaV3Provider('6Lf60r8gAAAAAMl69Ut5TjxoXcryaZUWm5zt2oVw'),
     isTokenAutoRefreshEnabled: true
 });
+
+// @ts-ignore
+getToken(appCheck)
+    .then(() => {
+        console.log('success')
+    })
+    .catch( (error: { message: any; }) => {
+        console.log(error.message)
+    })
 
 
 ReactDOM.render(

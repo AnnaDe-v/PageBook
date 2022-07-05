@@ -5,9 +5,10 @@ import {routes} from './dataRoutes';
 import {useAuth} from "../providers/useAuth";
 import Auth from '../pages/auth/Auth';
 
-
 const RoutesC: FC = () => {
     const {user} = useAuth()
+
+
 
     return (
         <Routes>

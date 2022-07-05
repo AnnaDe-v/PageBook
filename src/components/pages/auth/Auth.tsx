@@ -10,6 +10,8 @@ import {useNavigate} from "react-router-dom";
 import { useAuth } from '../../providers/useAuth';
 import {setLoadingStatusAC} from "../../layout/layout-reducer";
 
+
+
 const Auth = () => {
     const { ga, user } = useAuth()
 
@@ -105,6 +107,7 @@ const Auth = () => {
                         </Button>
                     </ButtonGroup>
                 </form>
+
             </Grid>
     )
 }
