@@ -43,7 +43,7 @@ const Posts = () => {
         <Card key={`Post-${idx}`}>
             <Link
                 key={post.author._id}
-                to={`/profile/${post.author._id}`}
+                to={`/Pagebook/profile/${post.author._id}`}
                 style={{
                     display: 'flex',
                     alignItems: 'center',

@@ -13,7 +13,7 @@ const UserItems:FC = () => {
         <Card sx={{padding: 2, backgroundColor: '#F1F7FA', border: 'none', borderRadius: 3,}}>
             {
                 users.map(user => (
-            <Link to={`/profile/${user._id}`}
+            <Link to={`/Pagebook/profile/${user._id}`}
                   key={user._id}
                   style={{display: "flex", alignItems: "center", textDecoration: "none", marginBottom: 12}}
             >
@@ -41,7 +41,7 @@ const UserItems:FC = () => {
                 ) ) }
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('/messages')}>
+                    <ListItemButton onClick={() => navigate('/Pagebook/messages')}>
                         <ListItemIcon sx={{minWidth: 36 }}>
                             <MessageIcon/>
                         </ListItemIcon>

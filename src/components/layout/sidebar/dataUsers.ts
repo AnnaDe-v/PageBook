@@ -30,4 +30,11 @@ export const users: UserType[] = [
         name: 'Мария Желева',
         isInNetwork: true,
     },
+    {
+        _id: uuidv4(),
+        avatar:
+            'https://sun9-2.userapi.com/impf/c639524/v639524222/4e35a/R4320_oO-wg.jpg?size=604x403&quality=96&sign=782db985fb0be2e93103eea6741a6875&type=album',
+        name: 'Ray',
+        isInNetwork: true,
+    },
 ]

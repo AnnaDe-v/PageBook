@@ -13,7 +13,7 @@ const Header:FC = () => {
                 <Link
                     className={style.link}
                     key={'headerkey'}
-                    to={`/`}
+                    to={`/Pagebook`}
                 >
                     <img src={ImgLogo} alt='PB_logo'/>
                 </Link>

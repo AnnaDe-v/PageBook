@@ -8,37 +8,37 @@ import Conversation from '../messages/Conversation';
 
 export const routes = [
     {
-        path: '/',
+        path: '/Pagebook',
         exact: true,
         component: Home,
         auth: true,
     },
     {
-        path: '/profile',
+        path: '/Pagebook/profile',
         exact: false,
         component: Profile,
         auth: true,
     },
     {
-        path: '/messages',
+        path: '/Pagebook/messages',
         exact: true,
         component: Messages,
         auth: true,
     },
     {
-        path: '/message/:id',
+        path: '/Pagebook/message/:id',
         exact: false,
         component: Conversation,
         auth: true,
     },
     {
-        path: '/fiends',
+        path: '/Pagebook/fiends',
         exact: false,
         component: Friends,
         auth: true,
     },
     {
-        path: '/auth',
+        path: '/Pagebook/auth',
         exact: true,
         component: Auth,
         auth: false,

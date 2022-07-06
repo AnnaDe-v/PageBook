@@ -61,7 +61,7 @@ const Auth = () => {
 
 
     useEffect(() => {
-        if (user) navigate('/')
+        if (user) navigate('/Pagebook')
         // eslint-disable-next-line
     }, [user])
 

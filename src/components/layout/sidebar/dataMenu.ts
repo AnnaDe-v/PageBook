@@ -4,17 +4,17 @@ import {MenuItemType} from "../../../types";
 export const menu: MenuItemType[] = [
     {
         title: 'Моя страница',
-        link: '/profile',
+        link: '/Pagebook/profile',
         icon: Icons.Home
     },
     {
         title: 'Друзья',
-        link: '/friends',
+        link: '/Pagebook/friends',
         icon: Icons.People
     },
     {
         title: 'Новости',
-        link: '/news',
+        link: '/Pagebook/news',
         icon: Icons.Article
     },
 ]
