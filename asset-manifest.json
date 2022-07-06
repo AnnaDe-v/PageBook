@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/PageBook/static/css/main.11ad2e9d.css",
-    "main.js": "/PageBook/static/js/main.833bc49e.js",
+    "main.js": "/PageBook/static/js/main.4687cb65.js",
     "static/media/PB_logo.jpg": "/PageBook/static/media/PB_logo.ebd807c6fb655c284741.jpg",
     "index.html": "/PageBook/index.html",
     "main.11ad2e9d.css.map": "/PageBook/static/css/main.11ad2e9d.css.map",
-    "main.833bc49e.js.map": "/PageBook/static/js/main.833bc49e.js.map"
+    "main.4687cb65.js.map": "/PageBook/static/js/main.4687cb65.js.map"
   },
   "entrypoints": [
     "static/css/main.11ad2e9d.css",
-    "static/js/main.833bc49e.js"
+    "static/js/main.4687cb65.js"
   ]
 }
