@@ -40,7 +40,7 @@ const Posts = () => {
 
 
     let mappedPosts = posts.map((post, idx) => (
-        <Card key={`Post-${idx}`}>
+        <Card key={`Post-${idx}`} style={{padding: 30,}}>
             <Link
                 key={post.author._id}
                 to={`/Pagebook/profile/${post.author._id}`}
@@ -95,9 +95,6 @@ const Posts = () => {
     return (
         <>
             {mappedPosts}
-            {/*{posts.map(p => {*/}
-            {/*    <li>{p.postId}</li>*/}
-            {/*})}*/}
         </>
     )
 }

@@ -111,29 +111,3 @@ export const addPostsTC = (content: string, user: UserType, db: any) => {
         addPostsAC(dataForPosts)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// {...action.dataFromFb.map(p => ({
-//     author: {_id: p.author._id, avatar: p.author.avatar, name: p.author.name},
-//     content: p.content,
-//     createdAt: p.createdAt,
-//     postId: p.postId
-// }))}
