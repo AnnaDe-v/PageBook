@@ -5,39 +5,34 @@ import {Link} from "react-router-dom";
 import {useAuth} from '../../../components/providers/useAuth';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchPostsTC,  setPostsAC} from './posts-reducer';
+import {fetchPostsTC, removePostTC, setPostsAC} from './posts-reducer';
 import {AppRootStateType} from '../../../app/store';
 import {RequestStatusType} from "../../layout/layout-reducer";
-import {deleteDoc, doc} from "firebase/firestore";
 
 
 const Posts = () => {
     const [error, setError] = useState('')
-    debugger
     const posts = useSelector<AppRootStateType, PostType[]>(state => state.posts);
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.layout.status);
     const dispatch = useDispatch()
     const {db} = useAuth()
 
 
-    useEffect(() => {  dispatch(fetchPostsTC(db)
-    )
-    },[])
+    useEffect(() => {
+        dispatch(fetchPostsTC(db)
+        )
+    }, [])
 
 
-
-    const removePostHandler = async (postId: string) => {
+    const removePostHandler = (postId: string) => {
+        debugger
         try {
-            await deleteDoc(doc(db, `posts`, postId));
-            let filteredPosts = posts.filter(p => p.postId !== postId)
-            dispatch(setPostsAC(filteredPosts))
+            dispatch(removePostTC(postId, db))
+            debugger
         } catch (e: any) {
             setError(error)
-        } finally {
-
         }
     }
-
 
     let mappedPosts = posts.map((post, idx) => (
         <Card key={`Post-${idx}`} style={{padding: 30,}}>

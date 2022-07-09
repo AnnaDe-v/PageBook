@@ -6,7 +6,8 @@ import {postsReducer} from "../components/pages/home/posts-reducer";
 
 const rootReducer = combineReducers({
     layout: layoutReducer,
-    posts: postsReducer
+    posts: postsReducer,
+    // friends: friendsReducer,
 
 })
 

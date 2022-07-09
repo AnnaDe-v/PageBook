@@ -1,9 +1,8 @@
-import {initialPosts} from "./initialPosts";
 import {PostType, UserType} from "../../../types";
 import {Dispatch} from "redux";
 import {setLoadingStatus, setLoadingStatusAC} from "../../layout/layout-reducer";
 import {collection, doc, onSnapshot, deleteDoc, setDoc, Firestore} from "firebase/firestore";
-import {useAuth} from "../../providers/useAuth";
+
 
 const defaultState: PostType[] = []
 
@@ -11,15 +10,14 @@ const defaultState: PostType[] = []
 export const postsReducer = (state = defaultState, action: ActionsType): PostType[] => {
     switch (action.type) {
         case "POSTS/SET-POSTS":
-            debugger
             console.log(action.arrNew)
             return action.arrNew
         case "POSTS/REMOVE-POST":
             debugger
             return state.filter(p => p.postId !== action.postId)
+
         case "POSTS/ADD-POSTS":
             // @ts-ignore
-            // return action.dataForPosts.map(p => ({postId: p.postId, author: {_id: 'ajljkl', name: 'Ivan'}, content: p.content, createdAt: 'llkk'}))
             return [action.dataForPosts, ...state]
         default:
             return state
@@ -73,41 +71,36 @@ export const fetchPostsTC = (db: any) => {
 }
 
 
-// export const removePostTC = async (postId: string, db: any) => {
-//     return (dispatch: Dispatch<ActionsType>) => {
-//         debugger
-//         dispatch(setLoadingStatusAC('loading'))
-//         try {
-//             const {db} = useAuth()
-//             deleteDoc(doc(db, `posts/`, postId));
-//             console.log(postId)
-//             dispatch(removePostAC(postId))
-//             dispatch(setLoadingStatusAC('succeeded'))
-//         } catch (e: any) {
-//             console.log(e)
-//         }
-//     }
-// }
+export const removePostTC = (postId: string, db: any) => {
+    return (dispatch: Dispatch<ActionsType>) => {
+        debugger
+        dispatch(setLoadingStatusAC('loading'))
+        try {
+            deleteDoc(doc(db, `posts/`, postId));
+            dispatch(removePostAC(postId))
+        } catch (e: any) {
+            console.log(e)
+        } finally {
+            dispatch(setLoadingStatusAC('succeeded'))
+        }
+    }
+}
 
 
 export const addPostsTC = (content: string, user: UserType, db: any) => {
     return (dispatch: Dispatch<ActionsType>) => {
-        dispatch(setLoadingStatusAC('loading'))
-        const {user, db} = useAuth()
+        debugger
         const current = new Date();
         const date = `${current.toLocaleString()}`;
         const newPost = doc(collection(db, 'posts'))
-        debugger
         const dataForPosts = {
             postId: newPost.id,
             author: user,
             content,
             createdAt: date,
         }
-        debugger
-         setDoc(newPost, dataForPosts);
+        setDoc(newPost, dataForPosts);
         console.log(dataForPosts)
-        debugger
         addPostsAC(dataForPosts)
     }
 }
