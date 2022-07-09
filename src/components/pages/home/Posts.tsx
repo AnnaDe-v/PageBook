@@ -25,10 +25,9 @@ const Posts = () => {
 
 
     const removePostHandler = (postId: string) => {
-        debugger
         try {
             dispatch(removePostTC(postId, db))
-            debugger
+            dispatch(fetchPostsTC(db))
         } catch (e: any) {
             setError(error)
         }

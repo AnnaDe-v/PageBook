@@ -14,7 +14,8 @@ export const postsReducer = (state = defaultState, action: ActionsType): PostTyp
             return action.arrNew
         case "POSTS/REMOVE-POST":
             debugger
-            return state.filter(p => p.postId !== action.postId)
+            const filteredPosts = state.filter(p => p.postId !== action.postId)
+            return filteredPosts
 
         case "POSTS/ADD-POSTS":
             // @ts-ignore
@@ -40,7 +41,11 @@ type addPostsType = {
     content: string
     createdAt: string
 }
-export type ActionsType = ReturnType<typeof removePostAC> | setLoadingStatus | ReturnType<typeof setPostsAC> | ReturnType<typeof addPostsAC>;
+export type ActionsType =
+    ReturnType<typeof removePostAC>
+    | setLoadingStatus
+    | ReturnType<typeof setPostsAC>
+    | ReturnType<typeof addPostsAC>;
 
 
 export const fetchPostsTC = (db: any) => {
@@ -52,10 +57,10 @@ export const fetchPostsTC = (db: any) => {
                 doc.forEach((d: any) => {
                     arrayForNewPosts.push(d.data())
                 })
-                arrayForNewPosts.sort ( (a, b) => {
+                arrayForNewPosts.sort((a, b) => {
                     return Date.parse(a.createdAt) - Date.parse(b.createdAt);
                 });
-                let arrNew = arrayForNewPosts.reduce((arr: any[], el:PostType) =>
+                let arrNew = arrayForNewPosts.reduce((arr: any[], el: PostType) =>
                         ((arr.find(({postId}) => el.postId == postId) || arr.push(el)), arr)
                     , [])
                 console.log(arrNew)
@@ -72,17 +77,13 @@ export const fetchPostsTC = (db: any) => {
 
 
 export const removePostTC = (postId: string, db: any) => {
-    return (dispatch: Dispatch<ActionsType>) => {
+    return async (dispatch: Dispatch<ActionsType>) => {
         debugger
-        dispatch(setLoadingStatusAC('loading'))
-        try {
-            deleteDoc(doc(db, `posts/`, postId));
-            dispatch(removePostAC(postId))
-        } catch (e: any) {
-            console.log(e)
-        } finally {
-            dispatch(setLoadingStatusAC('succeeded'))
-        }
+        await dispatch(setLoadingStatusAC('loading'))
+
+        await deleteDoc(doc(db, `posts/`, postId));
+        await dispatch(removePostAC(postId))
+        await dispatch(setLoadingStatusAC('succeeded'))
     }
 }
 
