@@ -6,6 +6,8 @@ import {signOut} from 'firebase/auth'
 const User:FC = () => {
     const {user, ga} = useAuth()
 
+    console.log(user)
+
     return (
             <Card sx={{padding: 2, backgroundColor: '#F1F7FA', border: 'none', borderRadius: 3,}}>
                 <Chip avatar={<Avatar alt='' src={user?.avatar}/>}
